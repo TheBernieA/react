@@ -1,0 +1,45 @@
+form{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+
+}
+.new-item__controls {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 900px;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.new-item__control label {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.new-item__control input {
+  font: inherit;
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  width: 20rem;
+  max-width: 100%;
+}
+
+.new-item__actions {
+  height: 50px;
+}
+.new-item__actions button {
+  border: none;
+  border-radius: 0.2rem;
+  padding: 0.5rem;
+  cursor: pointer;
+}
+.new-item__actions button:hover {
+  outline: 1px solid rgb(151, 178, 208);
+}

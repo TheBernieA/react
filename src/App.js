@@ -1,37 +1,61 @@
-import {Fragment} from 'react';
+import { Route, Switch } from "react-router-dom";
+import "./App.css";
+import Header from "./layout/Header";
+import Items from "./components/Items";
+import Wrapper from "./components/UI/Wrapper";
 import { DATA } from "./database";
-import './App.css'
+import AddItem from "./pages/AddItem";
+import { useState } from "react";
+import ItemDetails from "./components/ItemDetails";
 
 const App = () => {
-  const items = DATA;
-  return ( 
-    <Fragment>
-       <header>
-      <nav>
-        <div className="logo">LOGO</div>
-        <ul className="link">
-          <li>Home</li>
-          <li>Contact</li>
-        </ul>
-      </nav>
-    </header>
-    <main>
-    <div className="slider">REACT PROPS AND COMPONENTS</div>
-    <ul className="item">
-      {items.map(item=>
-      <li>
-        <div className="card">
-        <div className="cover">
-          <img src={item.image} alt="" />
-        </div>
-        <h3 className="">{item.name}</h3>
-        <div className="price">€{item.price}</div>
-        </div>
-      </li>)}
-    </ul>
-    </main>
-    </Fragment>
-   );
-}
- 
+  const [items, setItemsData] = useState(DATA);
+
+  const addItem=(newData)=>{
+    setItemsData(prevData=> [...prevData,newData])
+   // setData((data) => [...data, enteredValues]);
+
+  }
+
+
+  return (
+    <div className="container">
+      <Header />
+      <main>
+        <Switch>
+          <Route path="/" exact>
+            <div className="slider">
+              <ul>
+                <li>REACT PROPS, COMPONENTS AND ROUTES</li>
+                <li>FORMS, OUTPUTTING DATA ON DETAILS PAGE AND CUSTOM HOOKS</li>
+              </ul>
+            </div>
+            <Wrapper>
+              {items.map((item) => (
+                <Items
+                  key={item.id}
+                  id={item.id}
+                  image={item.image}
+                  name={item.name}
+                  price={item.price}
+                />
+              ))}
+            </Wrapper>
+          </Route>
+
+          <Route path='/item/:id'>
+            <ItemDetails />
+          </Route>
+
+          <Route path="/addItem">
+            <AddItem onSaveItem={addItem} />
+          </Route>
+        </Switch>
+      </main>
+    </div>
+  );
+};
+
 export default App;
+
+
